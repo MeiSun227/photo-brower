@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 
 const AlbumList = ({ albums, fetchPhotosByAlbumId }) => {
 	const handleAlbumClick = (albumId) => {
-		console.log(albumId);
 		fetchPhotosByAlbumId(albumId);
 	};
 

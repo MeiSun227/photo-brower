@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AlbumList from "./Components/AlbumsList";
 import ImageGrid from "./Components/ImageGrid";
-import NavBar from "./Components/NavBar/NavBar";
+import NavBar from "./Components/NavBar";
+import PhotosGallery from "./Components/PhotoGallery";
 import photoService from "./services/photoService";
 
 const AppRouter = () => {
 	const [albums, setAlbums] = useState([]);
 	const [photos, setPhotos] = useState([]);
-	const [allPhotos, setAllPhotos] = useState([]);
 
 	const fetchPhotosByAlbumId = async (albumId) => {
 		try {
@@ -23,9 +23,6 @@ const AppRouter = () => {
 	useEffect(() => {
 		photoService.getAllAlbums().then((response) => {
 			setAlbums(response.data);
-		});
-		photoService.getPhotos().then((response) => {
-			setAllPhotos(response.data);
 		});
 	}, []);
 
@@ -47,7 +44,7 @@ const AppRouter = () => {
 					path="/albums/:id/photos"
 					element={<ImageGrid photos={photos} />}
 				/>
-				<Route exact path="/" element={<ImageGrid photos={allPhotos} />} />
+				<Route exact path="/" element={<PhotosGallery />} />
 			</Routes>
 		</Router>
 	);

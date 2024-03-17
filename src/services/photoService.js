@@ -1,11 +1,14 @@
 import axios from "axios";
 
-const getPhotos = async () => {
+const getPhotos = async (page, limit) => {
+	console.log(page);
+	console.log(limit);
+	console.log("meiem");
 	try {
 		const photoData = await axios.get(
-			"https://jsonplaceholder.typicode.com/photos"
+			`https://jsonplaceholder.typicode.com/photos?_page=${page}&_limit=${limit}`
 		);
-		return photoData;
+		return photoData.data;
 	} catch (error) {
 		console.error("Error fetching images:", error);
 	}
