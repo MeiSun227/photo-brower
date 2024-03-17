@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import AlbumList from "./Components/AlbumsList";
+import AlbumList from "./Components/AlbumList";
 import ImageGrid from "./Components/ImageGrid";
 import NavBar from "./Components/NavBar";
 import PhotosGallery from "./Components/PhotoGallery";
