@@ -1,27 +1,18 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AlbumList from "./Components/AlbumList";
-import ImageGrid from "./Components/ImageGrid";
+import AlbumPhotos from "./Components/AlbumPhotos";
 import NavBar from "./Components/NavBar";
 import PhotosGallery from "./Components/PhotoGallery";
-import photoService from "./services/photoService";
+import UserList from "./Components/UserList";
+import UserAlbums from "./Components/UserAlbums";
+import photoServices from "./services/photoServices";
 
 const AppRouter = () => {
 	const [albums, setAlbums] = useState([]);
-	const [photos, setPhotos] = useState([]);
-
-	const fetchPhotosByAlbumId = async (albumId) => {
-		try {
-			const photos = await photoService.getPhotosByAlbumId(albumId);
-			setPhotos(photos);
-			console.log("Photos for album", albumId, ":", photos);
-		} catch (error) {
-			console.error("Error fetching photos for album", albumId, ":", error);
-		}
-	};
 
 	useEffect(() => {
-		photoService.getAllAlbums().then((response) => {
+		photoServices.getAllAlbums().then((response) => {
 			setAlbums(response.data);
 		});
 	}, []);
@@ -30,20 +21,10 @@ const AppRouter = () => {
 		<Router>
 			<NavBar />
 			<Routes>
-				<Route
-					exact
-					path="/albums"
-					element={
-						<AlbumList
-							albums={albums}
-							fetchPhotosByAlbumId={fetchPhotosByAlbumId}
-						/>
-					}
-				/>
-				<Route
-					path="/albums/:id/photos"
-					element={<ImageGrid photos={photos} />}
-				/>
+				<Route path="/users/:id/albums" element={<UserAlbums />} />
+				<Route exact path="/users" element={<UserList />} />
+				<Route path="/albums/:id/photos" element={<AlbumPhotos />} />
+				<Route exact path="/albums" element={<AlbumList albums={albums} />} />
 				<Route exact path="/" element={<PhotosGallery />} />
 			</Routes>
 		</Router>

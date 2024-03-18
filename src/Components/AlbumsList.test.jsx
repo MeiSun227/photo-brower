@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
-import { vi } from "vitest";
+
 import { BrowserRouter as Router } from "react-router-dom";
 import userEvent from "@testing-library/user-event";
 
@@ -19,15 +19,11 @@ describe("AlbumsList", () => {
 			title: "Photo 2",
 		},
 	];
-	const fetchPhotosByAlbumId = vi.fn();
 
 	it("displays list of albums", async () => {
 		render(
 			<Router>
-				<AlbumList
-					albums={albums}
-					fetchPhotosByAlbumId={fetchPhotosByAlbumId}
-				/>
+				<AlbumList albums={albums} />
 			</Router>
 		);
 
@@ -42,6 +38,5 @@ describe("AlbumsList", () => {
 
 		const title = screen.getByRole("link", { name: "kissa love kala" });
 		await userEvent.click(title);
-		expect(fetchPhotosByAlbumId).toHaveBeenCalledWith(1);
 	});
 });

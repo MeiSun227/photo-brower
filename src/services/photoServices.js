@@ -1,9 +1,6 @@
 import axios from "axios";
 
 const getPhotos = async (page, limit) => {
-	console.log(page);
-	console.log(limit);
-	console.log("meiem");
 	try {
 		const photoData = await axios.get(
 			`https://jsonplaceholder.typicode.com/photos?_page=${page}&_limit=${limit}`
@@ -25,10 +22,10 @@ const getAllAlbums = async () => {
 	}
 };
 
-const getPhotosByAlbumId = async (albumId) => {
+const getPhotosByAlbumId = async (albumId, page, limit) => {
 	try {
 		const photoData = await axios.get(
-			`https://jsonplaceholder.typicode.com//albums/${albumId}/photos`
+			`https://jsonplaceholder.typicode.com/albums/${albumId}/photos?_page=${page}&_limit=${limit}`
 		);
 		return photoData.data;
 	} catch (error) {
@@ -36,9 +33,9 @@ const getPhotosByAlbumId = async (albumId) => {
 	}
 };
 
-const photoService = {
+const photoServices = {
 	getPhotos,
 	getAllAlbums,
 	getPhotosByAlbumId,
 };
-export default photoService;
+export default photoServices;

@@ -18,7 +18,10 @@ const NavBar = () => {
 								<Link to="/">Photos</Link>
 							</li>
 							<li className="text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium">
-								<Link to="/Albums">Albums</Link>
+								<Link to="/albums">Albums</Link>
+							</li>
+							<li className="text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium">
+								<Link to="/users">Users</Link>
 							</li>
 						</ul>
 					</div>

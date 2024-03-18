@@ -1,25 +1,31 @@
 import { useEffect, useState } from "react";
 import ImageGrid from "./ImageGrid";
 import photoServices from "../services/photoServices";
+import { useParams } from "react-router-dom";
 
-const PhotosGallery = () => {
-	const [currentPage, setCurrentPage] = useState(1);
+const AlbumPhotos = () => {
+	const { id } = useParams();
 	const [photos, setPhotos] = useState([]);
-	const limit = 12;
-	const totalPhotos = 5000;
+	const [currentPage, setCurrentPage] = useState(1);
+	const limit = 10;
+	const totalPhotos = 50;
 	const totalPages = Math.ceil(totalPhotos / limit);
 
 	useEffect(() => {
 		const fetchPhotoData = async () => {
 			try {
-				const photoData = await photoServices.getPhotos(currentPage, limit);
+				const photoData = await photoServices.getPhotosByAlbumId(
+					id,
+					currentPage,
+					limit
+				);
 				setPhotos(photoData);
 			} catch (error) {
 				console.error("Error fetching data:", error);
 			}
 		};
 		fetchPhotoData();
-	}, [currentPage]);
+	}, [id, currentPage]);
 
 	const nextPage = () => {
 		setCurrentPage((prevPage) => prevPage + 1);
@@ -28,6 +34,7 @@ const PhotosGallery = () => {
 	const previosPage = () => {
 		setCurrentPage((prevPage) => (prevPage > 1 ? prevPage - 1 : prevPage));
 	};
+
 	return (
 		<div>
 			<h1 className=" text-2xl font-bold p-2 text-blue-400">Photos</h1>
@@ -43,9 +50,7 @@ const PhotosGallery = () => {
 					}`}>
 					Previous
 				</button>
-				<span className="text-gray-700">
-					{currentPage} / {totalPages}
-				</span>
+
 				<button
 					onClick={nextPage}
 					className={`p-2 m-2 rounded w-40 inline-block ${
@@ -60,4 +65,4 @@ const PhotosGallery = () => {
 	);
 };
 
-export default PhotosGallery;
+export default AlbumPhotos;

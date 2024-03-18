@@ -1,10 +1,6 @@
 import { Link } from "react-router-dom";
 
-const AlbumList = ({ albums, fetchPhotosByAlbumId }) => {
-	const handleAlbumClick = (albumId) => {
-		fetchPhotosByAlbumId(albumId);
-	};
-
+const AlbumList = ({ albums }) => {
 	return (
 		<div className="max-w-800 mx-auto px-4 sm:px-6 lg:px-8 ">
 			<h1 className="text-3xl font-bold text-red-200 p-2 m-2">Albums</h1>
@@ -13,9 +9,7 @@ const AlbumList = ({ albums, fetchPhotosByAlbumId }) => {
 					<div
 						key={album.id}
 						className="bg-gray-100 rounded-lg overflow-hidden shadow-md p-3 transition-transform duration-300 ease">
-						<Link
-							to={`/albums/${album.id}/photos`}
-							onClick={() => handleAlbumClick(album.id)}>
+						<Link to={`/albums/${album.id}/photos`}>
 							<div className="p-4 text-blue-600 center">
 								<p>{album.title}</p>
 							</div>
