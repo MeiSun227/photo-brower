@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import ImageGrid from "./ImageGrid";
+import ImageGrid from "../Components/ImageGrid";
 
 describe("ImageGrid", () => {
 	const photos = [

@@ -4,7 +4,7 @@ import { render, screen } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import userEvent from "@testing-library/user-event";
 
-import AlbumList from "./AlbumList";
+import AlbumList from "../Components/AlbumList";
 
 describe("AlbumsList", () => {
 	const albums = [
